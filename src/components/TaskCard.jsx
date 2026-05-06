@@ -105,13 +105,35 @@ export default function TaskCard({ task, index, onUpdate, onDelete }) {
               <span className="text-sm font-semibold text-white truncate">
                 {task.name || `Examen ${index + 1}`}
               </span>
-              {isCollapsed && task.conformite && (
-                <span className={`flex-shrink-0 w-7 h-7 rounded-lg flex items-center justify-center
-                                 ${task.conformite === 'C' ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'}`}>
-                  {task.conformite === 'C' ? <Check size={14} /> : <X size={14} />}
-                </span>
-              )}
             </button>
+            {isCollapsed && (
+              <>
+                <button
+                  onClick={() => handleConformite('C')}
+                  className={`flex-shrink-0 w-10 h-10 rounded-xl flex items-center justify-center
+                             active:scale-90 transition-all
+                             ${task.conformite === 'C'
+                               ? 'bg-green-500/25 text-green-400 border border-green-500/30'
+                               : 'bg-[var(--color-bg)] text-[var(--color-text-muted)] border border-[var(--color-border)] hover:bg-[var(--color-surface-hover)]'
+                             }`}
+                  aria-label="Conforme"
+                >
+                  <Check size={16} />
+                </button>
+                <button
+                  onClick={() => handleConformite('NC')}
+                  className={`flex-shrink-0 w-10 h-10 rounded-xl flex items-center justify-center
+                             active:scale-90 transition-all
+                             ${task.conformite === 'NC'
+                               ? 'bg-red-500/25 text-red-400 border border-red-500/30'
+                               : 'bg-[var(--color-bg)] text-[var(--color-text-muted)] border border-[var(--color-border)] hover:bg-[var(--color-surface-hover)]'
+                             }`}
+                  aria-label="Non Conforme"
+                >
+                  <X size={16} />
+                </button>
+              </>
+            )}
             <button
               onClick={() => { setEditName(task.name); setIsEditing(true); }}
               className="w-11 h-11 rounded-xl flex items-center justify-center
