@@ -100,11 +100,17 @@ export default function TaskCard({ task, index, onUpdate, onDelete }) {
           <>
             <button
               onClick={() => setIsCollapsed(!isCollapsed)}
-              className="flex-1 text-left min-h-[44px] flex items-center"
+              className="flex-1 text-left min-h-[44px] flex items-center gap-2"
             >
               <span className="text-sm font-semibold text-white truncate">
                 {task.name || `Examen ${index + 1}`}
               </span>
+              {isCollapsed && task.conformite && (
+                <span className={`flex-shrink-0 w-7 h-7 rounded-lg flex items-center justify-center
+                                 ${task.conformite === 'C' ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'}`}>
+                  {task.conformite === 'C' ? <Check size={14} /> : <X size={14} />}
+                </span>
+              )}
             </button>
             <button
               onClick={() => { setEditName(task.name); setIsEditing(true); }}
