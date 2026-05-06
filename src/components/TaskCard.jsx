@@ -43,7 +43,13 @@ export default function TaskCard({ task, index, onUpdate, onDelete }) {
       style={{ animationDelay: `${index * 50}ms` }}
     >
       {/* ===== HEADER ===== */}
-      <div className="flex items-center gap-2 p-4 border-b border-[var(--color-border)]">
+      <div className={`flex items-center gap-2 p-4 border-b transition-colors duration-300
+                       ${task.conformite === 'C'
+                         ? 'bg-green-500/10 border-green-500/20'
+                         : task.conformite === 'NC'
+                           ? 'bg-red-500/10 border-red-500/20'
+                           : 'border-[var(--color-border)]'
+                       }`}>
         {/* Index badge — tap to collapse/expand */}
         <button
           onClick={() => setIsCollapsed(!isCollapsed)}
