@@ -11,7 +11,7 @@ export default function Header({ onOpenHistory, onArchive, taskCount }) {
           </div>
           <div>
             <h1 className="text-base font-bold tracking-tight text-white leading-tight">
-              MyRZ
+              Myrzapp
             </h1>
             <p className="text-[11px] text-[var(--color-text-muted)] leading-tight">
               Relevés de conformité
