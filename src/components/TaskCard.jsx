@@ -50,19 +50,15 @@ export default function TaskCard({ task, index, onUpdate, onDelete }) {
                            ? 'bg-red-500/10 border-red-500/20'
                            : 'border-[var(--color-border)]'
                        }`}>
-        {/* Index badge — tap to collapse/expand */}
+        {/* Edit button (replaces index badge) */}
         <button
-          onClick={() => setIsCollapsed(!isCollapsed)}
+          onClick={() => { setEditName(task.name); setIsEditing(true); }}
           className="flex-shrink-0 w-10 h-10 rounded-xl bg-indigo-500/15 text-indigo-400 
-                     flex flex-col items-center justify-center
-                     hover:bg-indigo-500/25 active:scale-90 transition-all cursor-pointer"
-          aria-label={isCollapsed ? "Déplier" : "Replier"}
+                     flex items-center justify-center
+                     hover:bg-indigo-500/25 active:scale-90 transition-all"
+          aria-label="Éditer le nom"
         >
-          <span className="text-xs font-bold leading-none">{index + 1}</span>
-          {isCollapsed
-            ? <ChevronDown size={10} className="mt-0.5 opacity-70" />
-            : <ChevronUp size={10} className="mt-0.5 opacity-70" />
-          }
+          <Pencil size={16} />
         </button>
 
         {/* Name / Edit */}
@@ -105,6 +101,9 @@ export default function TaskCard({ task, index, onUpdate, onDelete }) {
               <span className="text-sm font-semibold text-white truncate">
                 {task.name || `Examen ${index + 1}`}
               </span>
+              {isCollapsed && (
+                <ChevronDown size={14} className="flex-shrink-0 text-[var(--color-text-muted)] opacity-50" />
+              )}
             </button>
             {isCollapsed && (
               <>
@@ -135,15 +134,6 @@ export default function TaskCard({ task, index, onUpdate, onDelete }) {
               </>
             )}
             <button
-              onClick={() => { setEditName(task.name); setIsEditing(true); }}
-              className="w-11 h-11 rounded-xl flex items-center justify-center
-                         bg-[var(--color-bg)] border border-[var(--color-border)]
-                         hover:bg-[var(--color-surface-hover)] active:scale-95 transition-all"
-              aria-label="Éditer le nom"
-            >
-              <Pencil size={16} className="text-[var(--color-text-muted)]" />
-            </button>
-            <button
               onClick={() => onDelete(task.id)}
               className="w-11 h-11 rounded-xl flex items-center justify-center
                          bg-red-500/10 border border-red-500/20
@@ -151,15 +141,6 @@ export default function TaskCard({ task, index, onUpdate, onDelete }) {
               aria-label="Supprimer"
             >
               <Trash2 size={16} className="text-red-400" />
-            </button>
-            <button
-              onClick={() => setIsCollapsed(!isCollapsed)}
-              className="w-11 h-11 rounded-xl flex items-center justify-center
-                         bg-[var(--color-bg)] border border-[var(--color-border)]
-                         hover:bg-[var(--color-surface-hover)] active:scale-95 transition-all"
-              aria-label={isCollapsed ? "Déplier" : "Replier"}
-            >
-              {isCollapsed ? <ChevronDown size={16} className="text-[var(--color-text-muted)]" /> : <ChevronUp size={16} className="text-[var(--color-text-muted)]" />}
             </button>
           </>
         )}
