@@ -44,11 +44,20 @@ export default function TaskCard({ task, index, onUpdate, onDelete }) {
     >
       {/* ===== HEADER ===== */}
       <div className="flex items-center gap-2 p-4 border-b border-[var(--color-border)]">
-        {/* Index badge */}
-        <span className="flex-shrink-0 w-8 h-8 rounded-lg bg-indigo-500/15 text-indigo-400 
-                         flex items-center justify-center text-xs font-bold">
-          {index + 1}
-        </span>
+        {/* Index badge — tap to collapse/expand */}
+        <button
+          onClick={() => setIsCollapsed(!isCollapsed)}
+          className="flex-shrink-0 w-10 h-10 rounded-xl bg-indigo-500/15 text-indigo-400 
+                     flex flex-col items-center justify-center
+                     hover:bg-indigo-500/25 active:scale-90 transition-all cursor-pointer"
+          aria-label={isCollapsed ? "Déplier" : "Replier"}
+        >
+          <span className="text-xs font-bold leading-none">{index + 1}</span>
+          {isCollapsed
+            ? <ChevronDown size={10} className="mt-0.5 opacity-70" />
+            : <ChevronUp size={10} className="mt-0.5 opacity-70" />
+          }
+        </button>
 
         {/* Name / Edit */}
         {isEditing ? (
