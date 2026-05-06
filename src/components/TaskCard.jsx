@@ -4,7 +4,7 @@ import { Pencil, Trash2, Check, X, ChevronDown, ChevronUp } from 'lucide-react';
 export default function TaskCard({ task, index, onUpdate, onDelete }) {
   const [isEditing, setIsEditing] = useState(!task.name);
   const [editName, setEditName] = useState(task.name);
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(true);
 
   const handleSaveName = () => {
     onUpdate({ ...task, name: editName.trim() || `Examen ${index + 1}` });
